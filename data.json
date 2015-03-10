@@ -1,0 +1,5 @@
+[
+  { "Author": "Kevin Isom", "Text": "Hello React.js on Node" },
+  { "Author": "A Person", "Text": "This is one comment" },
+  { "Author": "Someone Else", "Text": "This is *another* comment" }
+]
