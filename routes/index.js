@@ -3,7 +3,9 @@ var router = express.Router();
 require("node-jsx").install(); 
 var React = require('react/addons');
 var CommentBox = React.createFactory(require('../jsx/CommentApp').CommentBox);
-var data = require('../data.json');     
+var data = require('../data.json');    
+var bodyParser = require('body-parser');
+var urler = bodyParser.urlencoded({ extended: false })
 router.get('/', function(req, res, next) { 
 
         var reactHtml = React.renderToString(CommentBox({initialData:data}));
