@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
-require("node-jsx").install(); 
-var React = require('react/addons');
+require("node-jsx").install();
+var React = require('react');
+var ReactDOM = require('react-dom/server');
 var CommentBox = React.createFactory(require('../jsx/CommentApp').CommentBox);
-var data = require('../data.json');    
+var data = require('../data.json');
 var bodyParser = require('body-parser');
 var urler = bodyParser.urlencoded({ extended: false })
-router.get('/', function(req, res, next) { 
+router.get('/', function(req, res, next) {
 
-        var reactHtml = React.renderToString(CommentBox({initialData:data}));
+        var reactHtml = ReactDOM.renderToString(CommentBox({initialData:data}));
         res.render('index', {title: 'React Demo',reactOutput: reactHtml });
 
 });
-router.get('/comments', function(req, res, next) { 
+router.get('/comments', function(req, res, next) {
         res.send(data);
 
 });
-router.post('/comments', urler, function(req, res, next) { 
+router.post('/comments', urler, function(req, res, next) {
     console.log(req.body);
    data.push({Author: req.body.Author, Text: req.body.Text});
    console.log(data);

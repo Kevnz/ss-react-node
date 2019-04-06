@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var React = window.React = require('react/addons');
+var React = window.React = require('react');
 
 var CommentBox = require('./CommentApp').CommentBox;
 var data = [
@@ -14,7 +14,7 @@ React.renderComponent(
 );
 
 
-},{"./CommentApp":3,"react/addons":5}],2:[function(require,module,exports){
+},{"./CommentApp":3,"react":5}],2:[function(require,module,exports){
 module.exports=[
   { "Author": "Kevin Isom", "Text": "Hello React.js on Node" },
   { "Author": "A Person", "Text": "This is one comment" },
@@ -22,17 +22,17 @@ module.exports=[
 ]
 },{}],3:[function(require,module,exports){
 var data = require('../data.json');
-var React = require('react/addons');
+var React = require('react');
 var Showdown = require('showdown');
 var Comment = React.createClass({displayName: "Comment",
 	render: function() {
 		var converter = new Showdown.converter();
 		var rawMarkup = converter.makeHtml(this.props.children.toString());
 		return (
-			React.createElement("div", {className: "comment"}, 
-				React.createElement("h2", {className: "commentAuthor"}, 
+			React.createElement("div", {className: "comment"},
+				React.createElement("h2", {className: "commentAuthor"},
 					this.props.author
-				), 
+				),
 				React.createElement("span", {dangerouslySetInnerHTML: {__html: rawMarkup}})
 			)
 		);
@@ -43,13 +43,13 @@ var CommentList = React.createClass({displayName: "CommentList",
 	render: function() {
 	    var commentNodes = this.props.data.map(function (comment) {
 			return (
-				React.createElement(Comment, {author: comment.Author}, 
+				React.createElement(Comment, {author: comment.Author},
 					comment.Text
 				)
 			);
 		});
 		return (
-			React.createElement("div", {className: "commentList"}, 
+			React.createElement("div", {className: "commentList"},
 				commentNodes
 			)
 		);
@@ -71,9 +71,9 @@ var CommentForm = React.createClass({displayName: "CommentForm",
 	},
 	render: function() {
   		return (
-			React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit}, 
-				React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}), 
-				React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"}), 
+			React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit},
+				React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}),
+				React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"}),
 				React.createElement("input", {type: "submit", value: "Post"})
 			)
 		);
@@ -88,7 +88,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
 			var data = JSON.parse(xhr.responseText);
 			this.setState({ data: data });
 		}.bind(this);
-		xhr.send();	
+		xhr.send();
 	},
 	handleCommentSubmit: function(comment) {
 		var comments = this.state.data;
@@ -114,9 +114,9 @@ var CommentBox = React.createClass({displayName: "CommentBox",
 	},
 	render: function() {
 		return (
-			React.createElement("div", {className: "commentBox"}, 
-				React.createElement("h1", null, "Comments"), 
-				React.createElement(CommentList, {data: this.state.data}), 
+			React.createElement("div", {className: "commentBox"},
+				React.createElement("h1", null, "Comments"),
+				React.createElement(CommentList, {data: this.state.data}),
 				React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit})
 			)
 		);
@@ -124,7 +124,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
 });
 module.exports.CommentBox = CommentBox;
 
-},{"../data.json":2,"react/addons":5,"showdown":166}],4:[function(require,module,exports){
+},{"../data.json":2,"react":5,"showdown":166}],4:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

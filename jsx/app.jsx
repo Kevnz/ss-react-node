@@ -1,4 +1,4 @@
-var React = window.React = require('react/addons');
+var React = window.React = require('react');
 
 var CommentBox = require('./CommentApp').CommentBox;
 var data = [
